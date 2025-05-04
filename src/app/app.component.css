@@ -1,0 +1,30 @@
+@reference "../styles.css";
+
+:host {
+  @apply min-h-[100dvh];
+  @apply w-[100dvw];
+  @apply flex;
+}
+
+.sidebar {
+  @apply min-w-[250px];
+  @apply min-h-full;
+  @apply border-r border-base-200;
+  @apply p-6;
+  @apply fixed;
+}
+
+.list {
+  @apply flex flex-col;
+}
+
+.list-item {
+  @apply cursor-pointer;
+  @apply hover:bg-base-200;
+  @apply active:bg-base-100;
+  @apply p-2;
+}
+
+.main {
+  @apply w-full;
+}

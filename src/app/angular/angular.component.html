@@ -1,0 +1,17 @@
+<ng-container>
+  <div class="content">
+    @if (post$ | async; as post) {
+    <app-post-header [post]="post"></app-post-header>
+    <div class="content-fragments">
+      @for (fragment of post.fragments; track fragment.id) {
+      <app-fragment
+        [data]="fragment.content"
+        [component]="fragment.type"
+        [type]="fragment.type"
+        [id]="fragment.id"
+      ></app-fragment>
+      }
+    </div>
+    }
+  </div>
+</ng-container>

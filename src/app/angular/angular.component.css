@@ -1,0 +1,21 @@
+@reference "../../styles.css";
+
+:host {
+  @apply py-16;
+  @apply flex;
+  @apply justify-center;
+  @apply flex-col;
+  @apply items-center;
+  @apply w-full;
+}
+
+.content {
+  @apply w-full;
+  @apply max-w-[700px];
+}
+
+.content-fragments {
+  @apply flex;
+  @apply flex-col;
+  @apply gap-4;
+}

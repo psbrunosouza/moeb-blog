@@ -1,0 +1,18 @@
+@reference "../../../styles.css";
+
+:host {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-fragment-icon {
+  @apply invisible;
+  @apply h-fit;
+  @apply cursor-pointer;
+  @apply p-2;
+}
+
+:host:hover .btn-fragment-icon {
+  @apply visible;
+}
