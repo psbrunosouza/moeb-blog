@@ -1,0 +1,22 @@
+{
+  "version": 3,
+  "builds": [
+    {
+      "src": "dist/moeb-blog/server/entry.mjs",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "dist/moeb-blog/browser/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/.*",
+      "dest": "dist/moeb-blog/server/entry.mjs"
+    }
+  ]
+}
