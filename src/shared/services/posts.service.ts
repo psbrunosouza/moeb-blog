@@ -7,7 +7,7 @@ interface Params {
   categoryName: string;
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PostsService {
   private supabase = inject(SupabaseService);
 
@@ -59,6 +59,25 @@ export class PostsService {
         } as Post;
       }),
       tap((post) => post?.fragments.sort((a, b) => a.order - b.order))
+    );
+  }
+
+  list(language: string = 'en-US'): Observable<Post[]> {
+    return from(
+      this.supabase.client
+        .from('posts')
+        .select(`slug`)
+        .order('created_at', { ascending: false })
+    ).pipe(
+      map(({ data }) => {
+        return (
+          data?.map((post) => {
+            return {
+              ...post,
+            } as Post;
+          }) || []
+        );
+      })
     );
   }
 
