@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { Post } from '../interface/post';
-import { catchError, from, map, Observable, pipe, tap } from 'rxjs';
+import { catchError, filter, from, map, Observable, pipe, tap } from 'rxjs';
 
 interface Params {
   categoryName: string;
@@ -56,8 +56,9 @@ export class PostsService {
           ...data,
           fragments,
           tags,
-        };
-      })
+        } as Post;
+      }),
+      tap((post) => post?.fragments.sort((a, b) => a.order - b.order))
     );
   }
 

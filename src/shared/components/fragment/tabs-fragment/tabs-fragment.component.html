@@ -1,11 +1,14 @@
 <ng-container>
-  @for (item of data()?.value; track item.title; let i = $index) {
+  @for (tab of tabs; track tab.title; let i = $index) {
   <label class="tab">
     <input [checked]="i === 0" type="radio" name="name" />
-    {{ item.title }}
+    {{ tab.title }}
   </label>
   <div class="tab-content bg-base-100 border-base-300 p-6 " style="height: fit-content">
-    {{ item.content }}
+    @if(tab.type === tabContentEnum.CODE) {
+    <markdown [data]="tab.content"></markdown>
+    }
+
   </div>
   }
 </ng-container>
