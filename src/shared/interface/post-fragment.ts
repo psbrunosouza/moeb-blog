@@ -1,9 +1,9 @@
-import { FragmentNameType } from './fragment';
+import { FragmentType } from './fragments/fragment';
 
 export interface PostFragment {
   id: number;
   content: string;
-  type: FragmentNameType;
+  type: FragmentType;
   order: number;
   postId: number;
   languageId: number;

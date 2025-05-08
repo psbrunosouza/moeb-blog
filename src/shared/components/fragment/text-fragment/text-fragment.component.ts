@@ -1,7 +1,18 @@
 import { Component, HostBinding, input } from '@angular/core';
-import { FragmentNameType } from '@shared/interface/fragment';
+import {
+  FragmentDataMap,
+  FragmentType,
+  FragmentValue,
+} from '@shared/interface/fragments/fragment';
 import { cva } from 'class-variance-authority';
 import { MarkdownComponent } from 'ngx-markdown';
+
+type TextFragmentType =
+  | FragmentType.CONTENT_TEXT
+  | FragmentType.CONTENT_H1
+  | FragmentType.CONTENT_H2
+  | FragmentType.CONTENT_H3
+  | FragmentType.CONTENT_SMALL;
 
 @Component({
   selector: 'app-text-fragment',
@@ -11,16 +22,17 @@ import { MarkdownComponent } from 'ngx-markdown';
 })
 export class TextFragmentComponent {
   id = input<number>();
-  data = input<string>('');
-  type = input<FragmentNameType>(FragmentNameType.TEXT);
+  data = input<FragmentValue<TextFragmentType>>();
+  type = input<TextFragmentType>(FragmentType.CONTENT_TEXT);
 
   private textVariant = cva(``, {
     variants: {
       variant: {
-        [FragmentNameType.TEXT]: 'font-medium',
-        [FragmentNameType.H1]: 'font-bold text-4xl',
-        [FragmentNameType.H2]: 'font-bold text-3xl',
-        [FragmentNameType.H3]: 'font-bold text-2xl',
+        [FragmentType.CONTENT_TEXT]: 'font-medium',
+        [FragmentType.CONTENT_H1]: 'font-bold text-4xl',
+        [FragmentType.CONTENT_H2]: 'font-bold text-3xl',
+        [FragmentType.CONTENT_H3]: 'font-bold text-2xl',
+        [FragmentType.CONTENT_SMALL]: 'text-sm',
       },
     },
   });

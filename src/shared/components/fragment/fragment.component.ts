@@ -9,10 +9,11 @@ import {
   InputSignal,
 } from '@angular/core';
 import {
-  FragmentNameType,
+  FragmentType,
   FragmentDataMap,
   FragmentComponentType,
-} from '../../interface/fragment';
+  FragmentDataMapTypes,
+} from '../../interface/fragments/fragment';
 import { ComponentRegistryService } from '../../services/component-registry.service';
 import { IconComponent } from '../icon/icon.component';
 
@@ -26,10 +27,10 @@ export class FragmentComponent implements OnInit {
   @ViewChild('fragment', { read: ViewContainerRef, static: true })
   container!: ViewContainerRef;
 
-  component = input<FragmentNameType>();
+  component = input<FragmentType>();
   id = input<number>(0);
-  data = input<FragmentDataMap['TEXT'] | FragmentDataMap['H1']>();
-  type = input<FragmentNameType>(FragmentNameType.TEXT);
+  data = input<FragmentDataMapTypes>();
+  type = input<FragmentType>(FragmentType.CONTENT_TEXT);
 
   private componentRegistryService = inject(ComponentRegistryService);
 
@@ -54,8 +55,8 @@ export class FragmentComponent implements OnInit {
     fragment: Type<FragmentComponentType>,
     data: {
       id: number;
-      data: FragmentDataMap['TEXT'] | FragmentDataMap['H1'];
-      type: FragmentNameType;
+      data: FragmentDataMapTypes;
+      type: FragmentType;
     }
   ) {
     if (!fragment) {
