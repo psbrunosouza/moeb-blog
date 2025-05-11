@@ -1,7 +1,7 @@
 export enum TAB_CONTENT_ENUM {
-  MARKDOWN = 'MARKDOWN',
-  CODE = 'CODE',
-  TEXT = 'TEXT',
+  TYPESCRIPT = 'TYPESCRIPT',
+  HTML = 'HTML',
+  PREVIEW = 'PREVIEW',
 }
 
 export interface TabFragment {
@@ -9,4 +9,5 @@ export interface TabFragment {
   content: string;
   language: string;
   type: TAB_CONTENT_ENUM;
+  filename: string;
 }

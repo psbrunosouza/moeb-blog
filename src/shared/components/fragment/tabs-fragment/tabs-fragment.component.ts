@@ -7,6 +7,7 @@ import {
   input,
   model,
 } from '@angular/core';
+import { PreviewRenderComponent } from '@shared/components/preview-render/preview-render.component';
 import {
   FragmentType,
   FragmentValue,
@@ -20,7 +21,7 @@ import { MarkdownComponent, MarkdownService } from 'ngx-markdown';
 
 @Component({
   selector: 'app-tabs-fragment',
-  imports: [CommonModule, MarkdownComponent],
+  imports: [CommonModule, MarkdownComponent, PreviewRenderComponent],
   templateUrl: './tabs-fragment.component.html',
   styleUrl: './tabs-fragment.component.css',
 })
@@ -28,24 +29,10 @@ export class TabsFragmentComponent {
   id = input<number>();
   data = input.required<FragmentValue<FragmentType.TABS>>();
   type = input<FragmentType>(FragmentType.TABS);
-  tabs: TabFragment[] = [];
 
   tabContentEnum = TAB_CONTENT_ENUM;
 
   markdownService = inject(MarkdownService);
-
-  constructor() {
-    effect(() => {
-      if (this.data) {
-        this.tabs = this.data().value.map((tab) => {
-          return {
-            ...tab,
-            content: this.getTabContentByFormat(tab),
-          };
-        });
-      }
-    });
-  }
 
   private textVariant = cva(`tabs tabs-lift w-full`);
 
@@ -56,16 +43,5 @@ export class TabsFragmentComponent {
   @HostBinding('class')
   get classes(): string {
     return this.textVariant();
-  }
-
-  getTabContentByFormat(tab: TabFragment): string {
-    if (tab.type === TAB_CONTENT_ENUM.CODE) {
-      return `
-      \`\`\`${tab.language}
-      ${tab.content}
-      \`\`\`
-      `;
-    }
-    return tab.content;
   }
 }

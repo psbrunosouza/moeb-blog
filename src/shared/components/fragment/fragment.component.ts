@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import {
   FragmentType,
-  FragmentDataMap,
   FragmentComponentType,
   FragmentDataMapTypes,
 } from '../../interface/fragments/fragment';

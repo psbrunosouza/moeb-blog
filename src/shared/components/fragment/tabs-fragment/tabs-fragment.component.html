@@ -1,12 +1,15 @@
 <ng-container>
-  @for (tab of tabs; track tab.title; let i = $index) {
+  @for (tab of data().value; track tab.title; let i = $index) {
   <label class="tab">
     <input [checked]="i === 0" type="radio" name="name" />
     {{ tab.title }}
   </label>
   <div class="tab-content bg-base-100 border-base-300 p-6 " style="height: fit-content">
-    @if(tab.type === tabContentEnum.CODE) {
+    @if(tab.type === tabContentEnum.HTML || tab.type === tabContentEnum.TYPESCRIPT) {
     <markdown [data]="tab.content"></markdown>
+    <small class="italic opacity-50">{{tab.filename}}</small>
+    }@else if (tab.type === tabContentEnum.PREVIEW) {
+    <app-preview-render [component]="tab.content"></app-preview-render>
     }
 
   </div>
